@@ -1,11 +1,11 @@
-import './styles/App.css'
+import './frontend/styles/App.css'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { Navbar } from './components/Navbar.jsx'
-import { Home } from './pages/Home.jsx'
-import { About } from './pages/About.jsx'
-import { Login } from './pages/Login.jsx'
-import { Footer } from './components/Footer.jsx'
-import { Signup } from './pages/Signup.jsx'
+import { Navbar } from './frontend/components/Navbar.jsx'
+import { Home } from './frontend/pages/Home.jsx'
+import { About } from './frontend/pages/About.jsx'
+import { Login } from './frontend/pages/Login.jsx'
+import { Footer } from './frontend/components/Footer.jsx'
+import { Signup } from './frontend/pages/Signup.jsx'
 
 
 function App() {
