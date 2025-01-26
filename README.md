@@ -1,3 +1,7 @@
+# Finder, the bridge between the it companies and talent
+
+Descripción breve del proyecto.
+
 Este proyecto es una **aplicación web** full-stack construida con **React** para el frontend y **Flask** para el backend. Utiliza **Redux** para el manejo del estado global en el frontend y **SQLAlchemy** junto con **PostgreSQL** para gestionar la base de datos en el backend.
 
 ## Tecnologías
