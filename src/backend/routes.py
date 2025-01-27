@@ -5,6 +5,7 @@ import datetime
 from flask import Flask, request, jsonify, url_for, Blueprint
 from flask_cors import CORS
 from flask_bcrypt import generate_password_hash, check_password_hash  
+from backend.models import db, User
 
 
 api = Blueprint('api', __name__)
