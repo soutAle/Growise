@@ -1,8 +1,27 @@
-# React + Vite
+# Finder, the bridge between the it companies and talent
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Descripción breve del proyecto.
 
-Currently, two official plugins are available:
+Este proyecto es una **aplicación web** full-stack construida con **React** para el frontend y **Flask** para el backend. Utiliza **Redux** para el manejo del estado global en el frontend y **SQLAlchemy** junto con **PostgreSQL** para gestionar la base de datos en el backend.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Tecnologías
+
+### Frontend:
+- **React**: Librería de JavaScript para construir interfaces de usuario.
+- **Tailwind CSS**: Framework de CSS para estilos utilitarios.
+- **Redux**: Librería para manejar el estado global de la aplicación.
+
+### Backend:
+- **Flask**: Framework web para Python.
+- **SQLAlchemy**: ORM para interactuar con bases de datos.
+- **PostgreSQL**: Base de datos relacional.
+
+## Instalación
+
+### 1. Clonar el repositorio
+
+Primero, clona el repositorio en tu máquina local:
+
+```bash
+git clone https://github.com/usuario/repositorio.git
+cd repositorio
