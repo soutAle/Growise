@@ -23,5 +23,8 @@ dist-ssr
 *.sln
 *.sw?
 
+# Python files
 __pycache__/
+migrations/__pycache__/
 *.pyc
+
