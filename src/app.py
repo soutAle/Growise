@@ -2,15 +2,12 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 import os
-from flask import Flask, request, jsonify, url_for, send_from_directory
+from flask import Flask, request, jsonify, url_for
 from flask_migrate import Migrate
-from flask_swagger import swagger
 from backend.models import db
 from backend.routes import api
 from flask_bcrypt import Bcrypt 
 from flask_jwt_extended import JWTManager
-
-# from models import Person
 
 ENV = "development" if os.getenv("FLASK_DEBUG") == "1" else "production"
 app = Flask(__name__)
