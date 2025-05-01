@@ -11,10 +11,10 @@ flask-swagger = "*"
 flask-bcrypt = "*"
 sqlalchemy = "*"
 flask-cors = "*"
-flask-jwt-extended = "*"
 psycopg2 = "*"
 psycopg2-binary = "*"
 python-dotenv = "*"
+flask-jwt-extended = "*"
 
 [dev-packages]
 
