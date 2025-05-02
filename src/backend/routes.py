@@ -8,6 +8,7 @@ from flask_bcrypt import generate_password_hash, check_password_hash
 from flask_jwt_extended import get_jwt_identity, create_access_token, jwt_required  
 from backend.models import db, User
 from flask_bcrypt import Bcrypt
+import re
 
 
 api = Blueprint('api', __name__)
@@ -24,19 +25,29 @@ def signup():
     password = data.get('password')
 
     if not email or not password:
-        return jsonify({"error": "Email and password are required"}), 400
+        return jsonify({"error": "El email y la contraseña son requeridos"}), 400
     
     user_exist = User.query.filter_by(email=email).first()
     if user_exist:
-        return jsonify({"error": "User already exists"}), 400
+        return jsonify({"error": "Usuario ya registrado"}), 400
+    
+    
+    if not re.match(r"[^@]+@[^@]+\.[^@]+", email):
+        return jsonify({"error": "Formato de email inválido"}), 400
 
-    hashed_password = generate_password_hash(password).decode('utf-8')
+    if len(password) < 6:
+        return jsonify({"error": "Contraseña muy corta"}), 400
+
+    if User.query.filter_by(email=email).first():
+        return jsonify({"error": "Este email ya está registrado"}), 400
+
+    hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
 
     new_user = User(email=email, password=hashed_password, name=name, is_active=True)
     db.session.add(new_user)
     db.session.commit()
 
-    access_token = create_access_token(identity=email, expires_delta=datetime.timedelta(days=1))
+    access_token = create_access_token(identity=new_user.id, expires_delta=datetime.timedelta(days=1))
 
     return jsonify({"message": "User created successfully",
                     "access_token": access_token,
@@ -51,10 +62,10 @@ def login():
     user = User.query.filter_by(email=email).first()
 
     if not user:
-        return jsonify({"msg": "User not found"}), 404
+        return jsonify({"msg": "Usuario no encontrado"}), 404
 
     if bcrypt.check_password_hash(user.password, password):
-        access_token = create_access_token(identity=email, expires_delta=datetime.timedelta(days=1))
+        access_token = create_access_token(identity=user.id, expires_delta=datetime.timedelta(days=1))
 
         return jsonify({
             "msg": "Login exitoso",
