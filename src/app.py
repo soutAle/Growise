@@ -2,24 +2,22 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 import os
-from flask import Flask, request, jsonify, url_for
+from flask import Flask
 from flask_migrate import Migrate
-from backend.models import db
-from backend.routes import api
-from flask_bcrypt import Bcrypt 
-from flask_jwt_extended import JWTManager
+from backend.routes import all_blueprints
+from backend.extensions import db, bcrypt, jwt
 
 ENV = "development" if os.getenv("FLASK_DEBUG") == "1" else "production"
 app = Flask(__name__)
 app.url_map.strict_slashes = False
 
 # bcrypt config
-bcrypt = Bcrypt(app) 
+bcrypt.init_app(app)
 
 
 # Setup the Flask-JWT-Extended extension
 app.config["JWT_SECRET_KEY"] = "super-secret"  # Change this!
-jwt = JWTManager(app)
+jwt.init_app(app)
 
 # database condiguration
 db_url = os.getenv("DATABASE_URL")
@@ -34,7 +32,9 @@ MIGRATE = Migrate(app, db, compare_type=True)
 db.init_app(app)
 
 # Add all endpoints form the API with a "api" prefix
-app.register_blueprint(api, url_prefix='/api')
+for bp in all_blueprints:
+    app.register_blueprint(bp, url_prefix='/api')
+    
 
 
 # this only runs if `$ python src/main.py` is executed

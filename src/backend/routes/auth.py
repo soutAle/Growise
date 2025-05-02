@@ -2,45 +2,28 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 import datetime
-from flask import Flask, request, jsonify, url_for, Blueprint
+from flask import request, jsonify, Blueprint
 from flask_cors import CORS
-from flask_bcrypt import generate_password_hash, check_password_hash
-from flask_jwt_extended import get_jwt_identity, create_access_token, jwt_required  
-from backend.models import db, User
-from flask_bcrypt import Bcrypt
-import re
+from flask_jwt_extended import create_access_token
+from backend.models.user import db, User
+from backend.extensions import bcrypt
+from backend.utils.validators import validate_signup_data, validate_login_data
 
+auth_bp = Blueprint('auth_bp', __name__)
 
-api = Blueprint('api', __name__)
-bcrypt = Bcrypt()
+CORS(auth_bp)
 
-# Allow CORS requests to this API
-CORS(api)
-
-@api.route('/signup', methods=['POST'])
+@auth_bp.route('/signup', methods=['POST'])
 def signup():
     data = request.get_json()
     name = data.get('name')
     email = data.get('email')
     password = data.get('password')
-
-    if not email or not password:
-        return jsonify({"error": "El email y la contraseña son requeridos"}), 400
     
-    user_exist = User.query.filter_by(email=email).first()
-    if user_exist:
-        return jsonify({"error": "Usuario ya registrado"}), 400
+    error = validate_signup_data(name, email, password)
+    if error: 
+        return jsonify({"error": error}), 400
     
-    
-    if not re.match(r"[^@]+@[^@]+\.[^@]+", email):
-        return jsonify({"error": "Formato de email inválido"}), 400
-
-    if len(password) < 6:
-        return jsonify({"error": "Contraseña muy corta"}), 400
-
-    if User.query.filter_by(email=email).first():
-        return jsonify({"error": "Este email ya está registrado"}), 400
-
     hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
 
     new_user = User(email=email, password=hashed_password, name=name, is_active=True)
@@ -53,14 +36,17 @@ def signup():
                     "access_token": access_token,
                     "user": new_user.serialize()}), 201
 
-@api.route('/login', methods=['POST'])
+@auth_bp.route('/login', methods=['POST'])
 def login():
     data = request.get_json()
     email = data.get("email")
     password = data.get("password")
 
+    error = validate_login_data(email, password)
+    if error:
+        return jsonify({"error": error}), 400
+    
     user = User.query.filter_by(email=email).first()
-
     if not user:
         return jsonify({"msg": "Usuario no encontrado"}), 404
 
@@ -68,7 +54,7 @@ def login():
         access_token = create_access_token(identity=user.id, expires_delta=datetime.timedelta(days=1))
 
         return jsonify({
-            "msg": "Login exitoso",
+            "msg": "Login successful",
             "access_token": access_token,
             "user": user.serialize()
         }), 200
