@@ -1,4 +1,4 @@
-// filepath: /c:/Users/Alejandro/Finder/postcss.config.js
+// filepath: /c:/Users/Alejandro/Growise/postcss.config.js
 export default {
     plugins: {
         tailwindcss: {},

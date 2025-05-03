@@ -8,7 +8,7 @@ export const Navbar = () => {
                 <div className="flex justify-center items-end py-4">
                     <div className="text-2xl font-bold mx-2">
                         <Link to="/" className="hover:text-gray-300">
-                            Finder
+                            Growise
                         </Link>
                     </div>
                     <ul className="flex space-x-10 ms-10">
