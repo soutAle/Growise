@@ -1,4 +1,4 @@
-# Growise, the bridge between the it companies and talent
+# Growise, Crece con inteligencia
 
 Descripción breve del proyecto.
 
