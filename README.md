@@ -1,4 +1,4 @@
-# Finder, the bridge between the it companies and talent
+# Growise, the bridge between the it companies and talent
 
 Descripción breve del proyecto.
 

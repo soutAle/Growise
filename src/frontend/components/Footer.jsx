@@ -9,7 +9,7 @@ export const Footer = () => {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                     {/* Sección: Acerca de */}
                     <div>
-                        <h2 className="text-2xl font-bold text-white">Finder</h2>
+                        <h2 className="text-2xl font-bold text-white">Growise</h2>
                         <p className="mt-4 text-sm text-gray-400">
                             Conectamos talento con oportunidad.
                         </p>
