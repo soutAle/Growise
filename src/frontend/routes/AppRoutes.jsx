@@ -1,8 +1,8 @@
 import { Routes, Route } from 'react-router-dom'
 import { Home } from '../pages/Home.jsx'
 import { About } from '../pages/About.jsx'
-import { Login } from '../pages/Login.jsx'
-import { Signup } from '../pages/Signup.jsx'
+import { Login } from '../features/auth/pages/Login.jsx'
+import { Signup } from '../features/auth/pages/Signup.jsx'
 
 export const AppRoutes = () => {
     return (
