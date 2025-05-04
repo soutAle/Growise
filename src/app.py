@@ -14,7 +14,7 @@ app = Flask(__name__)
 app.url_map.strict_slashes = False
 
 # CORS configuration
-CORS(app)
+CORS(app, resources={r"/api/*": {"origins": "http://localhost:5173"}})
 
 # bcrypt config
 bcrypt.init_app(app)

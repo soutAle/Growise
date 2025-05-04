@@ -3,6 +3,7 @@ import axios from 'axios'
 import { useDispatch } from 'react-redux'
 import { loginSuccess } from '../authSlice.js'
 import { useNavigate } from 'react-router-dom'
+import { GoogleLoginButton } from '../../../components/GoogleLogButton.jsx'
 
 export const LoginFormComponent = () => {
     const [email, setEmail] = useState('')
@@ -62,7 +63,7 @@ export const LoginFormComponent = () => {
                     Entrar
                 </button>
             </form>
-
+            <GoogleLoginButton />
             {error && (
                 <p className="text-red-500 text-sm text-center mt-4">
                     {error}
