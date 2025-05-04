@@ -3,15 +3,12 @@ This module takes care of starting the API Server, Loading the DB and Adding the
 """
 import datetime
 from flask import request, jsonify, Blueprint
-from flask_cors import CORS
 from flask_jwt_extended import create_access_token
 from backend.models.user import db, User
 from backend.extensions import bcrypt
 from backend.utils.validators import validate_signup_data, validate_login_data
 
 auth_bp = Blueprint('auth_bp', __name__)
-
-CORS(auth_bp)
 
 @auth_bp.route('/signup', methods=['POST'])
 def signup():

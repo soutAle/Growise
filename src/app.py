@@ -6,10 +6,15 @@ from flask import Flask
 from flask_migrate import Migrate
 from backend.routes import all_blueprints
 from backend.extensions import db, bcrypt, jwt
+from flask_cors import CORS
+
 
 ENV = "development" if os.getenv("FLASK_DEBUG") == "1" else "production"
 app = Flask(__name__)
 app.url_map.strict_slashes = False
+
+# CORS configuration
+CORS(app)
 
 # bcrypt config
 bcrypt.init_app(app)
