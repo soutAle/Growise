@@ -23,7 +23,7 @@ def handle_google_login(token):
             return {"error": "El usuario ya existe con otro método de registro"}
 
         if not user:
-            user = User(email=email, name=name, is_active=True, resgisterType='google')
+            user = User(email=email, name=name, is_active=True, registerType='google')
             db.session.add(user)
             db.session.commit()
 
@@ -38,5 +38,5 @@ def handle_google_login(token):
     except ValueError:
         return {"error": "Token de Google inválido o expirado"}, 400
     except Exception as e:
-        print("Error inesperado:", e)
+        print("Error inesperado:", str(e))
         return {"error": "Error interno del servidor"}, 500
