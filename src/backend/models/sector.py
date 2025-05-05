@@ -1,4 +1,5 @@
 from backend.extensions import db
+from backend.models.users_sector import users_sector
 
 class Sector(db.Model):
     __tablename__ = 'sector'
@@ -10,7 +11,7 @@ class Sector(db.Model):
     knowledge_area_id = db.Column(db.Integer, db.ForeignKey('knowledge_area.knowledge_area_id'), nullable=False)
 
     sessions = db.relationship('SessionActive', back_populates='sector', lazy=True)
-    users = db.relationship('User', back_populates='sector', lazy=True)  
+    users = db.relationship('User', secondary=users_sector, back_populates='sectors', lazy=True)
     knowledge_area = db.relationship('KnowledgeArea', back_populates='sectors', lazy=True)
 
     def __repr__(self):
