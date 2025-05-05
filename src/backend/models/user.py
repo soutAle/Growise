@@ -1,4 +1,5 @@
 from backend.extensions import db
+from backend.models.users_sector import users_sector
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -17,8 +18,7 @@ class User(db.Model):
     knowledge_area_id = db.Column(db.Integer, db.ForeignKey('knowledge_area.knowledge_area_id'), nullable=True)
     knowledge_area = db.relationship('KnowledgeArea', back_populates='users', lazy=True)
 
-    sector_id = db.Column(db.Integer, db.ForeignKey('sector.sector_id'), nullable=True)
-    sector = db.relationship('Sector', back_populates='users', lazy=True)  # <--- Corregido
+    sectors = db.relationship('Sector', secondary=users_sector, back_populates='users', lazy=True)
 
     sessions_attended = db.relationship(
         'SessionActive',
@@ -46,7 +46,7 @@ class User(db.Model):
             "experience": self.experience,
             "phone": self.phone,
             "academic_level": self.academic_level,
-            "sector": self.sector.serialize() if self.sector else None,
+            "sectors": [s.serialize() for s in self.sectors] if self.sectors else None,
             "knowledge_area": self.knowledge_area.serialize() if self.knowledge_area else None,
             "sessions_attended": [s.serialize() for s in self.sessions_attended],
             "sessions_created": [s.serialize() for s in self.sessions_created],
