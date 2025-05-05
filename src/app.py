@@ -9,6 +9,7 @@ from backend.extensions import db, bcrypt, jwt
 from flask_cors import CORS
 
 
+
 ENV = "development" if os.getenv("FLASK_DEBUG") == "1" else "production"
 app = Flask(__name__)
 app.url_map.strict_slashes = False

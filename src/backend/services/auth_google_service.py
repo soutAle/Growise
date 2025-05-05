@@ -19,11 +19,11 @@ def handle_google_login(token):
 
         # Buscar o crear usuario
         user = User.query.filter_by(email=email).first()
-        if user and user.registerType != 'google':
+        if user and user.register_type != 'google':
             return {"error": "El usuario ya existe con otro método de registro"}
 
         if not user:
-            user = User(email=email, name=name, is_active=True, registerType='google')
+            user = User(email=email, name=name, is_active=True, register_type='google')
             db.session.add(user)
             db.session.commit()
 
