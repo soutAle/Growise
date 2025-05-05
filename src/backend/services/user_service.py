@@ -1,5 +1,4 @@
 from backend.models.user import User
-from backend.extensions import db
 
 
 def get_all_users():
