@@ -1,7 +1,7 @@
 // frontend/components/GoogleLoginButton.jsx
 import { GoogleLogin } from '@react-oauth/google';
 import { useDispatch } from 'react-redux';
-import { loginSuccess } from '../features/auth/authSlice.js';
+import { loginSuccess } from '../features/auth/slices/authSlice.js';
 import { useNavigate } from 'react-router-dom';
 
 export const GoogleLoginButton = () => {
