@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import { useDispatch } from 'react-redux'
-import { loginSuccess } from '../authSlice.js'
+import { loginSuccess } from '../slices/authSlice.js'
 import { useNavigate } from 'react-router-dom'
 import { GoogleLoginButton } from '../../../components/GoogleLogButton.jsx'
 
