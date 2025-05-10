@@ -26,9 +26,9 @@ export const SignUpFormComponent = () => {
             dispatch(loginSuccess({ user: res.data.user, token: res.data.access_token }));
             localStorage.setItem("token", res.data.access_token);
             navigate("/home");
-        } catch (err) {
-            console.error(err);
-            setError(err.response?.data?.error || "Error al registrarse");
+        } catch (error) {
+            console.error(error);
+            setError(error.response?.data?.error || "Error al registrarse");
         }
     };
 
