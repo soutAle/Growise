@@ -25,9 +25,9 @@ export const LoginFormComponent = () => {
             localStorage.setItem('token', res.data.access_token)
             navigate('/home')
             console.log(res.data)
-        } catch (err) {
-            console.error(err)
-            setError(err.response?.data?.msg || 'Error al iniciar sesión')
+        } catch (error) {
+            console.error(error)
+            setError(error.response?.data?.msg || error.response?.data?.error)
         }
     }
 

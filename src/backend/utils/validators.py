@@ -10,9 +10,6 @@ def validate_signup_data(name, email, password):
 
     if len(password) < 6:
         return "Introduzca una contraseña de al menos 6 caracteres"
-    
-    if User.query.filter_by(email=email).first():
-        return "Este email ya está registrado"
 
     return None 
 

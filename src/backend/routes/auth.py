@@ -18,7 +18,8 @@ def signup():
     if error:
         return jsonify({"error": error}), 400
 
-    return jsonify(*register_user(name, email, password))
+    payload, status = register_user(name, email, password)
+    return jsonify(payload), status
 
 
 @auth_bp.route('/login', methods=['POST'])
@@ -31,4 +32,5 @@ def login():
     if error:
         return jsonify({"error": error}), 400
 
-    return jsonify(*login_user(email, password))
+    payload, status = login_user(email, password)
+    return jsonify(payload), status
