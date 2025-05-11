@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify
 from backend.services.user_service import get_all_users, get_user_by_id
-from flask_jwt_extended import get_jwt_identity, jwt_required
+from flask_jwt_extended import jwt_required
 
 user_bp = Blueprint('user_bp', __name__)
 
@@ -9,12 +9,12 @@ def get_users():
     users = get_all_users()
     if not users:
         return jsonify({"error": "No hay usuarios disponibles"}), 404
-    return jsonify(users), 200
+    return jsonify({'users': users}), 200
 
 @user_bp.route('/users/<int:user_id>', methods=['GET'])
 @jwt_required()
 def get_User(user_id):
-    validate_user = get_user_by_id(user_id)
-    if not validate_user:
+    user = get_user_by_id(user_id)
+    if not user:
         return jsonify({'error':'Usuario no encontrado'}),404
-    return jsonify(validate_user), 200
+    return jsonify({"user": user}), 200
