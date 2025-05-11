@@ -14,13 +14,7 @@ def get_users():
 @user_bp.route('/users/<int:user_id>', methods=['GET'])
 @jwt_required()
 def get_User(user_id):
-    current_user = get_jwt_identity()
-    if current_user != user_id:
-        return jsonify({'error':'No tienes permiso para acceder a este usuario'}),403
-    
-    if not current_user:
-        return jsonify({'error':'No tienes permiso para acceder a este usuario'}),403
-    
     validate_user = get_user_by_id(user_id)
     if not validate_user:
         return jsonify({'error':'Usuario no encontrado'}),404
+    return jsonify(validate_user), 200
