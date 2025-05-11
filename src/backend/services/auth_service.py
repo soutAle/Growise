@@ -23,10 +23,10 @@ def register_user(name, email, password):
 def login_user(email, password):
     user = User.query.filter_by(email=email).first()
     if not user:
-        return {"msg": "El usuario no está registrado"}, 400
+        return {"error": "El usuario no está registrado"}, 400
     
     if not bcrypt.check_password_hash(user.password, password):
-        return {"msg": "Contraseña incorrecta"}, 400
+        return {"error": "Contraseña incorrecta"}, 400
 
     token = create_access_token(identity=str(user.id), expires_delta=timedelta(days=1))
     return {
