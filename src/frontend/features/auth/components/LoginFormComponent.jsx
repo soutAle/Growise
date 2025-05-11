@@ -27,7 +27,7 @@ export const LoginFormComponent = () => {
             console.log(res.data)
         } catch (error) {
             console.error(error)
-            setError(error.response?.data?.msg || error.response?.data?.error)
+            setError(error.response?.data?.error || 'Error al iniciar sesión')
         }
     }
 
