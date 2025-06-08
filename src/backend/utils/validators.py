@@ -18,4 +18,11 @@ def validate_login_data(email, password):
         return "todos los campos son obligatorios"
     
     return None 
+
+def validate_user_data(user):
+    if not user: 
+        return "Usuario no encontrado"
+    
+    
+
  
